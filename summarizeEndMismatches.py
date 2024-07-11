@@ -37,8 +37,15 @@ with open(sys.argv[1], 'r', encoding="ascii", errors="surrogateescape") as inFil
 #######
 
 print("nt\tFirst\tMiddle\tLast\tPercentFirst\tPercentLast")
+
 for letter in alphabet:
     total = float(start_mismatch[letter] + nonend_mismatch[letter] + end_mismatch[letter])
-    print(str(letter) + '\t' + str(start_mismatch[letter]) + '\t' + str(nonend_mismatch[letter]) + '\t' + str(
-        end_mismatch[letter]) + '\t' + str(start_mismatch[letter] / total * 100) + '\t' + str(
-        end_mismatch[letter] / total * 100))
+    
+    # 7/11/2024 Harry Li: script returns div by 0 when total == 0, implement logic check 
+    if total > 0:
+        print(str(letter) + '\t' + str(start_mismatch[letter]) + '\t' + str(nonend_mismatch[letter]) + '\t' + str(
+            end_mismatch[letter]) + '\t' + str(start_mismatch[letter] / total * 100) + '\t' + str(
+            end_mismatch[letter] / total * 100))
+    else:
+        print(str(letter) + '\t' + str(start_mismatch[letter]) + '\t' + str(nonend_mismatch[letter]) + '\t' + str(
+            end_mismatch[letter]) + '\t' + str(0) + '\t' + str(0))
