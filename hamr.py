@@ -256,7 +256,9 @@ else:
 print("converting output to bed format...")
 bed_file = output_folder+'/'+args.out_prefix+".mods.bed"
 outfn = open(bed_file, 'w')
-subprocess.check_call(['awk', 'FNR > 1 {print $1"\t"$2"\t"(1+$2)"\t"$1";"$2"\t"$16"\t"$3}', prediction_file],
+# 2025-03-12 adaptig ritututeja's implementation for bed file creation
+# CHANGES OUTPUT: .bed
+subprocess.check_call(['awk', 'FNR > 1 {print $1"\t"$2"\t"($2-1)"\t"$1";"$2"\t"$16"\t"$3}', prediction_file],
                       stdout=outfn)
 outfn.close()
 
